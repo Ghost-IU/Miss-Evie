@@ -1,28 +1,26 @@
-# SKYLEEBOT
+# Miss_Evie
 
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 [![ForTheBadge built-with-love](http://ForTheBadge.com/images/badges/built-with-love.svg)](https://GitHub.com/Naereen/)
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/843cdeb7f4124dd39eb3930939478259)](https://app.codacy.com/manual/starry69/skyleebot?utm_source=github.com&utm_medium=referral&utm_content=starry69/skyleebot&utm_campaign=Badge_Grade_Dashboard)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-![logo](https://telegra.ph/file/0dd4a92bb893c1aaa6cee.jpg)
-
+![logo](https://telegra.ph/file/b9fdfdf5b440153ccb641.jpg)
 
 A modular telegram Python bot running on python3 with an sqlalchemy database.
 
 Originally a simple group management bot with multiple admin features, it has evolved, becoming extremely modular and 
 simple to use. Note that this project uses well-known Telegram-bot of it's time @BanhammerMarie_bot from Paul Larson as it's base.
 
-Can be found on telegram as [Skylee](https://t.me/skylee_bot).
+Can be found on telegram as [miss_evie](https://t.me/MissEvie_bot).
 
-Join the [news channel](https://t.me/skyleeupdates) if you just want to stay in the loop about new features or
+Join the [news channel](https://t.me/miss_evieupdates) if you just want to stay in the loop about new features or
 announcements.
 
-Alternatively, [contact my reporter bot on telegram](https://t.me/YumiUzo_bot)! (Keep all support questions in the support chat, where more people can help you.)
-
 ## Credits
+
+Starry69 for many stuffs.
 
 Skittbot for Stickers module and memes in extras module.
 
@@ -44,12 +42,11 @@ Any other missing Credits can be seen in commits!
 
 Once you've setup your database and your configuration (see below) is complete, simply run:
 
-`python3 -m skylee`
-
+`python3 -m miss_evie`
 
 ## Setting up the bot (Read this before trying to use!)
 
-Please make sure to use python3.6, as I cannot guarantee everything will work as expected on older python versions!
+Please make sure to use atleast python3.6, as I cannot guarantee everything will work as expected on older python versions!
 This is because markdown parsing is done by iterating through a dict, which are ordered by default in 3.6.
 
 ### Configuration
@@ -57,7 +54,7 @@ This is because markdown parsing is done by iterating through a dict, which are 
 There are two possible ways of configuring your bot: a config.py file, or ENV variables.
 
 The prefered version is to use a `config.py` file, as it makes it easier to see all your settings grouped together.
-This file should be placed in your `skylee` folder, alongside the `__main__.py` file . 
+This file should be placed in your `miss_evie` folder, alongside the `__main__.py` file . 
 This is where your bot token will be loaded from, as well as your database URI (if you're using a database), and most of 
 your other settings.
 
@@ -66,12 +63,12 @@ defaults set in the sample_config, hence making it easier to upgrade.
 
 An example `config.py` file could be:
 ```
-from skylee.sample_config import Config
+from miss_evie.sample_config import Config
 
 
 class Development(Config):
-    OWNER_ID =  894380120 # my telegram ID
-    OWNER_USERNAME = "starryboi"  # my telegram username
+    OWNER_ID =  823033347 # my telegram ID
+    OWNER_USERNAME = "devops117"  # my telegram username
     API_KEY = "your bot api key"  # my api key, as provided by the botfather
     SQLALCHEMY_DATABASE_URI = 'postgresql://username:password@localhost:5432/database'  # sample db credentials
     MESSAGE_DUMP = '-1234567890' # some group chat that your bot is a member of
@@ -133,7 +130,7 @@ Replace sqldbtype with whichever db youre using (eg postgres, mysql, sqllite, et
 repeat for your username, password, hostname (localhost?), port (5432?), and db name.
 
 ## Modules
-### Setting load order.
+### Setting load order
 
 The module load order can be changed via the `LOAD` and `NO_LOAD` configuration settings.
 These should both represent lists.
@@ -144,7 +141,7 @@ If `NO_LOAD` is not present, or is an empty list, all modules selected for loadi
 
 If a module is in both `LOAD` and `NO_LOAD`, the module will not be loaded - `NO_LOAD` takes priority.
 
-### Creating your own modules.
+### Creating your own modules
 
 Creating a module has been simplified as much as possible - but do not hesitate to suggest further simplification.
 
@@ -152,7 +149,7 @@ All that is needed is that your .py file be in the modules folder.
 
 To add commands, make sure to import the dispatcher via
 
-`from skylee import dispatcher`.
+`from miss_evie import dispatcher`.
 
 You can then add commands using the usual
 
