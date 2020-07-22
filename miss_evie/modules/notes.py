@@ -336,7 +336,7 @@ def list_notes(update, context):
     note_list = sql.get_all_chat_notes(chat_id)
     des = "You can get notes by using `/get notename`, or `#notename`.\n"
     for note in note_list:
-        note_name = " × `{}`\n".format(note.name.lower())
+        note_name = " `#{}`\n".format(note.name.lower())
         if len(msg) + len(note_name) > MAX_MESSAGE_LENGTH:
             update.effective_message.reply_text(msg, parse_mode=ParseMode.MARKDOWN)
             msg = ""

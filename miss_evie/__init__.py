@@ -1,7 +1,6 @@
 import logging
 import os
 import sys
-import spamwatch
 from telethon import TelegramClient
 import telegram.ext as tg
 
@@ -72,7 +71,6 @@ if ENV:
     LOAD = os.environ.get("LOAD", "").split()
     NO_LOAD = os.environ.get("NO_LOAD", "").split()
     DEL_CMDS = bool(os.environ.get("DEL_CMDS", False))
-    STRICT_GBAN = bool(os.environ.get("STRICT_GBAN", False))
     WORKERS = int(os.environ.get("WORKERS", 8))
     BAN_STICKER = os.environ.get("BAN_STICKER", "CAADAgADOwADPPEcAXkko5EB3YGYAg")
     CUSTOM_CMD = os.environ.get("CUSTOM_CMD", False)
@@ -80,7 +78,6 @@ if ENV:
     WALL_API = os.environ.get("WALL_API", None)
     TELETHON_ID = int(os.environ.get("TL_APP_ID", None))
     TELETHON_HASH = os.environ.get("TL_HASH", None)
-    SPAMWATCH = os.environ.get("SPAMWATCH_API", None)
 
 else:
     from miss_evie.config import Development as Config
@@ -127,7 +124,6 @@ else:
     LOAD = Config.LOAD
     NO_LOAD = Config.NO_LOAD
     DEL_CMDS = Config.DEL_CMDS
-    STRICT_GBAN = Config.STRICT_GBAN
     WORKERS = Config.WORKERS
     BAN_STICKER = Config.BAN_STICKER
     # ALLOW_EXCL = Config.ALLOW_EXCL
@@ -136,16 +132,8 @@ else:
     WALL_API = Config.WALL_API
     TELETHON_HASH = Config.TELETHON_HASH
     TELETHON_ID = Config.TELETHON_ID
-    SPAMWATCH = Config.SPAMWATCH_API
 
 SUDO_USERS.add(OWNER_ID)
-
-# Pass if SpamWatch token not set.
-if SPAMWATCH == None:
-    spamwtc = None
-    LOGGER.warning("Invalid spamwatch api")
-else:
-    spamwtc = spamwatch.Client(SPAMWATCH)
 
 # Telethon
 api_id = TELETHON_ID

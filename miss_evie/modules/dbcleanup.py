@@ -4,7 +4,6 @@ from telegram import Bot, Update, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.error import BadRequest, Unauthorized
 from telegram.ext import CommandHandler, CallbackQueryHandler, run_async, Filters
 
-import miss_evie.modules.sql.global_bans_sql as gban_sql
 import miss_evie.modules.sql.users_sql as user_sql
 from miss_evie import dispatcher, OWNER_ID
 
@@ -53,31 +52,6 @@ def get_invalid_chats(bot: Bot, update: Update, remove: bool = False):
             sleep(0.1)
             user_sql.rem_chat(muted_chat)
         return kicked_chats
-
-
-def get_invalid_gban(bot: Bot, update: Update, remove: bool = False):
-    banned = gban_sql.get_gban_list()
-    ungbanned_users = 0
-    ungban_list = []
-
-    for user in banned:
-        user_id = user["user_id"]
-        sleep(0.1)
-        try:
-            bot.get_chat(user_id)
-        except BadRequest:
-            ungbanned_users += 1
-            ungban_list.append(user_id)
-        except:
-            pass
-
-    if not remove:
-        return ungbanned_users
-    else:
-        for user_id in ungban_list:
-            sleep(0.1)
-            gban_sql.ungban_user(user_id)
-        return ungbanned_users
 
 
 @run_async

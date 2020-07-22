@@ -30,7 +30,6 @@ from miss_evie import (
     SUPPORT_USERS,
     WHITELIST_USERS,
     WALL_API,
-    spamwtc,
 )
 from miss_evie.__main__ import STATS, USER_INFO, GDPR
 from miss_evie.modules.disable import DisableAbleCommandHandler
@@ -116,30 +115,20 @@ def info(update, context):
     text = (
         "<b>USER INFO</b>:"
         "\n\nID: <code>{}</code>"
-        "\nFirst Name: {}".format(user.id, html.escape(user.first_name))
+        "\n\nFirst Name: <code>{}</code>".format(user.id, html.escape(user.first_name))
     )
 
     if user.last_name:
-        text += "\nLast Name: {}".format(html.escape(user.last_name))
+        text += "\nLast Name: <code>{}</code>".format(html.escape(user.last_name))
 
     if user.username:
-        text += "\nUsername: @{}".format(html.escape(user.username))
+        text += "\n\nUsername: @{}".format(html.escape(user.username))
 
     text += "\nPermanent user link: {}".format(mention_html(user.id, "link"))
 
     text += "\nNumber of profile pics: {}".format(
         context.bot.get_user_profile_photos(user.id).total_count
     )
-
-    try:
-        sw = spamwtc.get_ban(int(user.id))
-        if sw:
-            text += "\n\n<b>This person is banned in Spamwatch!</b>"
-            text += f"\nResason: <pre>{sw.reason}</pre>"
-        else:
-            pass
-    except:
-        pass  # Don't break on exceptions like if api is down?
 
     if user.id == OWNER_ID:
         text += "\n\nAye this guy is my owner.\nI would never do anything against him!"

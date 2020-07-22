@@ -6,7 +6,6 @@ import platform
 from psutil import cpu_percent, virtual_memory, disk_usage, boot_time
 from platform import python_version
 from telegram import __version__
-from spamwatch import __version__ as __sw__
 from pythonping import ping as ping3
 from telegram import ParseMode
 from telegram.ext import CommandHandler, run_async, Filters
@@ -104,7 +103,6 @@ def system_status(update, context):
     status += "<b>Storage used:</b> <code>" + str(disk[3]) + " %</code>\n\n"
     status += "<b>Python version:</b> <code>" + python_version() + "</code>\n"
     status += "<b>Library version:</b> <code>" + str(__version__) + "</code>\n"
-    status += "<b>Spamwatch API:</b> <code>" + str(__sw__) + "</code>\n"
     context.bot.sendMessage(update.effective_chat.id, status, parse_mode=ParseMode.HTML)
 
 

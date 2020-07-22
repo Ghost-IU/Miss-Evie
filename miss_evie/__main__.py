@@ -45,7 +45,7 @@ Wanna Add me to your Group? Just click the button below!
 buttons = [
     [
         InlineKeyboardButton(
-            text="Add to Group 👥", url="t.me/miss_evie_bot?startgroup=true"
+            text="Add to Group 👥", url="t.me/MissEvie_bot?startgroup=true"
         ),
         InlineKeyboardButton(text="Updates 📢", url="https://t.me/miss_evieupdates"),
     ]
