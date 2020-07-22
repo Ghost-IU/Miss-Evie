@@ -4,6 +4,7 @@
 [![ForTheBadge built-with-love](http://ForTheBadge.com/images/badges/built-with-love.svg)](https://GitHub.com/Naereen/)
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/ccae5ccdf3634b52961d68dcaf905ffa)](https://www.codacy.com/manual/devops117/skyleebot?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=devops117/skyleebot&amp;utm_campaign=Badge_Grade)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 ![logo](https://telegra.ph/file/b9fdfdf5b440153ccb641.jpg)
