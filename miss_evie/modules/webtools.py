@@ -17,17 +17,11 @@ from miss_evie.modules.helper_funcs.alternate import typing_action
 @run_async
 @typing_action
 def ping(update, context):
-    tg_api = ping3("api.telegram.org", count=4)
-    google = ping3("google.com", count=4)
-    text = "*Pong!*\n"
-    text += "Average speed to Telegram bot API server - `{}` ms\n".format(
-        tg_api.rtt_avg_ms
-    )
-    if google.rtt_avg:
-        gspeed = google.rtt_avg
-    else:
-        gspeed = google.rtt_avg
-    text += "Average speed to Google - `{}` ms".format(gspeed)
+    tg_api = ping3("api.telegram.org", count=5)
+    google = ping3("google.com", count=5)
+    text = "Average speed to:"
+    text += "\nTG bot API server - `{}` ms".format(tg_api.rtt_avg_ms)
+    text += "\nGoogle - `{}` ms".format(google.rtt_avg_ms)
     update.effective_message.reply_text(text, parse_mode=ParseMode.MARKDOWN)
 
 
