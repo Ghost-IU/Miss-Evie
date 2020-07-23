@@ -25,11 +25,7 @@ Starry69 for many stuffs.
 
 Skittbot for Stickers module and memes in extras module.
 
-1maverick1 for many stuffs.
-
 AyraHikari for weather modules and some other stuffs.
-
-RealAkito for reverse search modules.
 
 MrYacha for connections module
 
