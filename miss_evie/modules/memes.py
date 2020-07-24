@@ -452,12 +452,12 @@ Some dank memes for fun or whatever!
 
 *Regex based memes:*
 
-`/decide` can be also used with regex like: `miss_evie? <question>: randomly answer "Yes, No" etc.`
+`/decide` can be also used with regex like: `Evie? <question>: randomly answer "Yes, No" etc.`
 
 Some other regex filters are:
 `me too` | `goodmorning` | `goodnight`.
 
-miss_evie will reply random strings accordingly when these words are used!
+Evie will reply random strings accordingly when these words are used!
 All regex filters can be disabled incase u don't want... like: `/disable metoo`.
 
 """
@@ -466,7 +466,7 @@ __mod_name__ = "Memes"
 
 SHRUG_HANDLER = DisableAbleCommandHandler("shrug", shrug)
 DECIDE_HANDLER = DisableAbleMessageHandler(
-    Filters.regex(r"(?i)^miss_evie\?"), decide, friendly="decide"
+    Filters.regex(r"(?i)^Evie\?"), decide, friendly="decide"
 )
 SNIPE_HANDLER = CommandHandler(
     "snipe", snipe, pass_args=True, filters=CustomFilters.sudo_filter
