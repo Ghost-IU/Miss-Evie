@@ -303,9 +303,6 @@ def ud(update, context):
     if not text:
         msg.reply_text("Please enter keywords to search!")
         return
-    elif text == "starry":
-        msg.reply_text("Fek off bitch!")
-        return
     try:
         results = get(f"http://api.urbandictionary.com/v0/define?term={text}").json()
         reply_text = f'Word: {text}\nDefinition: {results["list"][0]["definition"]}'
