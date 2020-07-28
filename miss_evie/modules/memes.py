@@ -249,18 +249,6 @@ def recite(update, context):
 
 @run_async
 @typing_action
-def gbun(update, context):
-    user = update.effective_user
-    chat = update.effective_chat
-
-    if update.effective_message.chat.type == "private":
-        return
-    if int(user.id) in SUDO_USERS or int(user.id) in SUPPORT_USERS:
-        context.bot.sendMessage(chat.id, (random.choice(fun.GBUN)))
-
-
-@run_async
-@typing_action
 def snipe(update, context):
     args = context.args
     try:
@@ -444,6 +432,7 @@ Some dank memes for fun or whatever!
  × /pasta: Famous copypasta meme, try and see.
  × /clap: Claps on someones message!
  × /owo: UwU-fy whole text XD.
+ × /uwu: Does the same as above.
  × /roll: Rolls a dice.
  × /recite: Logical quotes to change your life.
  × /stretch:  streeeeeeetch iiiiiiit.
@@ -476,7 +465,6 @@ RUNS_HANDLER = DisableAbleCommandHandler("runs", runs)
 SLAP_HANDLER = DisableAbleCommandHandler("slap", slap, pass_args=True)
 PUNCH_HANDLER = DisableAbleCommandHandler("punch", punch, pass_args=True)
 HUG_HANDLER = DisableAbleCommandHandler("warm", hug, pass_args=True)
-GBUN_HANDLER = CommandHandler("gbun", gbun)
 TABLE_HANDLER = DisableAbleCommandHandler("table", table)
 CRI_HANDLER = DisableAbleCommandHandler("cri", cri)
 PASTA_HANDLER = DisableAbleCommandHandler("pasta", copypasta)
@@ -496,6 +484,7 @@ GDNIGHT_HANDLER = DisableAbleMessageHandler(
     Filters.regex(r"(?i)(goodnight)"), goodnight, friendly="goodnight"
 )
 
+OWO_HANDLER = CommandHandler(["owo", "uwu"], owo)
 
 dispatcher.add_handler(SHRUG_HANDLER)
 dispatcher.add_handler(DECIDE_HANDLER)
@@ -505,7 +494,6 @@ dispatcher.add_handler(RUNS_HANDLER)
 dispatcher.add_handler(SLAP_HANDLER)
 dispatcher.add_handler(PUNCH_HANDLER)
 dispatcher.add_handler(HUG_HANDLER)
-dispatcher.add_handler(GBUN_HANDLER)
 dispatcher.add_handler(TABLE_HANDLER)
 dispatcher.add_handler(RECITE_HANDLER)
 dispatcher.add_handler(CRI_HANDLER)

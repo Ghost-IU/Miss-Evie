@@ -386,17 +386,6 @@ TABLE = (
     "Go do some work instead of flippin tables.",
 )
 
-GBUN = (
-    "Beware! This bot-admeme can gbun you right off the map.",
-    "What if there was 'a' instead of 'u' ...👀",
-    "I guess you've forgot spelling of gban maybe...?",
-    "OK no!",
-    "OK boomer.",
-    "Don't misuse your powers noob...",
-    "Nah, he looks innocent...",
-    "Get ready for global bun hammer!",
-)
-
 DECIDE = ("Yes.", "NoU.", "Maybe.", "No.")
 
 # AFK strings credits: PaperPlaneExtended!
