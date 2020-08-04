@@ -25,18 +25,22 @@ def ping(update, context):
     update.effective_message.reply_text(text, parse_mode=ParseMode.MARKDOWN)
 
 
-# Kanged from PaperPlane Extended userbot
 def speed_convert(size):
     """
     Hi human, you can't read bytes?
     """
+    byte = 8
     power = 2 ** 10
-    zero = 0
-    units = {0: "", 1: "Kb/s", 2: "Mb/s", 3: "Gb/s", 4: "Tb/s"}
+    n = 1
+    units = {1: "KB/s", 2: "MB/s", 3: "GB/s", 4: "TB/s"}
     while size > power:
-        size /= power
-        zero += 1
-    return f"{round(size, 2)} {units[zero]}"
+        n += 1
+        size /= power ** n
+
+# convert bit to byte
+        size /= byte
+
+    return f"`{round(size, 2)}` {units[n]}"
 
 
 @run_async
@@ -60,17 +64,18 @@ def speedtst(update, context):
     test.upload()
     test.results.share()
     result = test.results.dict()
+    google = ping3("google.com", count=5)
+
     context.bot.editMessageText(
-        "Download "
+        "Download - "
         f"{speed_convert(result['download'])} \n"
-        "Upload "
+        "Upload - "
         f"{speed_convert(result['upload'])} \n"
-        "Ping "
-        f"{result['ping']} \n"
-        "ISP "
-        f"{result['client']['isp']}",
+        "Google - "
+        f"{'`{}` ms'.format(google.rtt_avg_ms)}",
         update.effective_chat.id,
         ed_msg.message_id,
+        parse_mode=ParseMode.MARKDOWN,
     )
 
 
