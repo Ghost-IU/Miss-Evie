@@ -300,8 +300,11 @@ def ud(update, context):
     msg = update.effective_message
     args = context.args
     text = " ".join(args).lower()
-    if not text:
-        msg.reply_text("Please enter keywords to search!")
+    if not text and msg.reply_to_message:
+        if msg.reply_to_message.text:
+            text = msg.reply_to_message.text
+    elif not text and not msg.reply_to_message:
+        msg.reply_text("Please enter keywords or reply to some mesaage to search!")
         return
     try:
         results = get(f"http://api.urbandictionary.com/v0/define?term={text}").json()
