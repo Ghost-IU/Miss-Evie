@@ -18,10 +18,8 @@ from miss_evie.modules.helper_funcs.alternate import typing_action
 @typing_action
 def ping(update, context):
     tg_api = ping3("api.telegram.org", count=5)
-    google = ping3("google.com", count=5)
-    text = "Average speed to:"
-    text += "\nTG bot API server - `{}` ms".format(tg_api.rtt_avg_ms)
-    text += "\nGoogle - `{}` ms".format(google.rtt_avg_ms)
+    text = "Pong!"
+    text += "\nTG API server - `{}` ms".format(tg_api.rtt_avg_ms)
     update.effective_message.reply_text(text, parse_mode=ParseMode.MARKDOWN)
 
 
@@ -64,15 +62,15 @@ def speedtst(update, context):
     test.upload()
     test.results.share()
     result = test.results.dict()
-    google = ping3("google.com", count=5)
+    tg_api = ping3("api.telegram.org", count=5)
 
     context.bot.editMessageText(
         "Download - "
         f"{speed_convert(result['download'])} \n"
         "Upload - "
         f"{speed_convert(result['upload'])} \n"
-        "Google - "
-        f"{'`{}` ms'.format(google.rtt_avg_ms)}",
+        "TG API Server - "
+        f"{'`{}` ms'.format(tg_api.rtt_avg_ms)}",
         update.effective_chat.id,
         ed_msg.message_id,
         parse_mode=ParseMode.MARKDOWN,
