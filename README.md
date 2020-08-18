@@ -18,6 +18,9 @@ Can be found on telegram as [miss_evie](https://t.me/MissEvie_bot).
 Join the [news channel](https://t.me/miss_evieupdates) if you just want to stay in the loop about new features or
 announcements.
 
+## Clone the repo
+`git clone -j$(nproc --all) https://github.com/SensiPeeps/Miss-Evie.git`
+
 ## Credits
 
 Starry69 for many stuffs.
@@ -37,14 +40,48 @@ Any other missing Credits can be seen in commits!
 ## Starting the bot
 
 Once you've setup your database and your configuration (see below) is complete, simply run:
+-  `python3 -m miss_evie`
 
-`python3 -m miss_evie`
+For podman users
+-  `sudo podman pod start miss_evie`
 
 ## Setting up the bot (Read this before trying to use!)
 
 Please make sure to use atleast python3.6, as I cannot guarantee everything will work as expected on older python versions!
 This is because markdown parsing is done by iterating through a dict, which are ordered by default in 3.6.
 
+## Podman
+**Update the package database**
+-  `sudo pacman -Sy`
+
+**Install podman**
+-  `sudo pacman -S podman`
+
+**Build the bot image(cd into the bot directory first)**
+-  `sudo podman build --no-cache -t miss_evie:1.0 .`
+
+**Create a pod and the containers(change YOUR_PASS appropriately)**
+-  `sudo podman pod create --name miss_evie`
+-  `sudo podman create --name evie --pod miss_evie localhost/miss_evie:1.0`
+-  `sudo podman create -e POSTGRES_PASSWORD=YOUR_PASS --name db_container --pod miss_evie postgres:alpine`
+
+**Configure the database container**
+-  `sudo podman start db_container`
+-  `sudo podman exec -it db_container /bin/sh`
+
+Then continue from step 2 of [#database](https://github.com/SensiPeeps/Miss-Evie#database)
+
+After exiting from the container
+
+**Configure the bot**
+
+Make the config.py, check out [#configuration](https://github.com/SensiPeeps/Miss-Evie#configuration)
+
+After making one
+-  `sudo podman cp <location of the config.py> evie:miss_evie/config.py`
+
+**Starting the bot(pod)**
+-  `sudo podman pod start miss_evie`
 ### Configuration
 
 There are two possible ways of configuring your bot: a config.py file, or ENV variables.
@@ -91,36 +128,36 @@ you'll need to have a database installed on your system. I use postgres, so I re
 
 In the case of postgres, this is how you would set up a the database on a debian/ubuntu system. Other distributions may vary.
 
-- install postgresql:
+**Install postgresql**
 
-`sudo apt-get update && sudo apt-get install postgresql`
+Don't do this if using podman/docker
+-  `sudo apt-get update && sudo apt-get install postgresql`
 
-- change to the postgres user:
+**Change to the postgres user**
 
-`sudo su - postgres`
+-  `sudo su - postgres`
 
-- create a new database user (change YOUR_USER appropriately):
-
-`createuser -P -s -e YOUR_USER`
+**Create a new database user (change YOUR_USER appropriately)**
 
 This will be followed by you needing to input your password.
+-  `createuser -P -s -e YOUR_USER`
 
-- create a new database table:
 
-`createdb -O YOUR_USER YOUR_DB_NAME`
+**Create a new database(Change YOUR_USER and YOUR_DB_NAME appropriately.)**
 
-Change YOUR_USER and YOUR_DB_NAME appropriately.
+-  `createdb -O YOUR_USER YOUR_DB_NAME`
 
-- finally:
+**Finally**
 
-`psql YOUR_DB_NAME -h YOUR_HOST YOUR_USER`
+-  `psql YOUR_DB_NAME -h YOUR_HOST YOUR_USER`
 
 This will allow you to connect to your database via your terminal.
 By default, YOUR_HOST should be 0.0.0.0:5432.
 
-You should now be able to build your database URI. This will be:
+You should now be able to build your database URI.
 
-`sqldbtype://username:pw@hostname:port/db_name`
+**Sample database URI**
+-  `sqldbtype://username:pw@hostname:port/db_name`
 
 Replace sqldbtype with whichever db youre using (eg postgres, mysql, sqllite, etc)
 repeat for your username, password, hostname (localhost?), port (5432?), and db name.
