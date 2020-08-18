@@ -431,8 +431,8 @@ def set_warn_limit(update, context) -> str:
     args = context.args
     if args:
         if args[0].isdigit():
-            if int(args[0]) < 3:
-                msg.reply_text("The minimum warn limit is 3!")
+            if int(args[0]) < 2:
+                msg.reply_text("The minimum warn limit is 2!")
             else:
                 sql.set_warn_limit(chat.id, int(args[0]))
                 msg.reply_text("Updated the warn limit to {}".format(args[0]))
@@ -546,18 +546,18 @@ __help__ = """
  An example of how to set a new multiword warning:
 `/warn @user Because warning is fun`
 
- × /warns <userhandle>: Gets a user's number, and reason, of warnings.
- × /warnlist: Lists all current warning filters
+ × /warns <userhandle>: Gets the amount of user's warns, and their reasons.
+ × /warnlist: Lists all current warning filters.
 
 *Admin only:*
- × /warn <userhandle>: Warns a user. After 3 warns, the user will be banned from the group. Can also be used as a reply.
+ × /warn <userhandle>: Warns the user.
+ × /warnlimit <num>: Sets the limit of warns.
  × /resetwarn <userhandle>: Resets the warnings for a user. Can also be used as a reply.
  × /rmwarn <userhandle>: Removes latest warn for a user. It also can be used as reply.
  × /unwarn <userhandle>: Same as /rmwarn
  × /addwarn <keyword> <reply message>: Sets a warning filter on a certain keyword. If you want your keyword to \
 be a sentence, encompass it with quotes, as such: `/addwarn "very angry" This is an angry user`. 
- × /nowarn <keyword>: Stops a warning filter
- × /warnlimit <num>: Sets the warning limit
+ × /nowarn <keyword>: Stops a warning filter.
  × /strongwarn <on/yes/off/no>: If set to on, exceeding the warn limit will result in a ban. Else, will just kick.
 """
 
