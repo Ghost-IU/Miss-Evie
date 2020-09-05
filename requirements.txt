@@ -9,6 +9,7 @@ pythonping
 feedparser
 pytz
 gtts
+bs4
 lxml
 demjson
 wget

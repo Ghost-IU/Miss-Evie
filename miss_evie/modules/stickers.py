@@ -108,7 +108,7 @@ def kang(update, context):
                 )
 
             except OSError as e:
-                msg.reply_text("I can only kang images m8.")
+                msg.reply_text("I can only kang images.")
                 print(e)
                 return
 
@@ -251,7 +251,7 @@ def kang(update, context):
                 parse_mode=ParseMode.MARKDOWN,
             )
         except OSError as e:
-            msg.reply_text("I can only kang images m8.")
+            msg.reply_text("I can only kang images.")
             print(e)
             return
         except TelegramError as e:
@@ -394,7 +394,7 @@ def getsticker(update, context):
         context.bot.sendChatAction(chat_id, "typing")
         update.effective_message.reply_text(
             "Hello"
-            + f"{mention_html(msg.from_user.id, msg.from_user.first_name)}"
+            + f" {mention_html(msg.from_user.id, msg.from_user.first_name)}"
             + ", Please check the file you requested below."
             "\nPlease use this feature wisely!",
             parse_mode=ParseMode.HTML,

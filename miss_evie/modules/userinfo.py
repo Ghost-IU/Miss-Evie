@@ -86,10 +86,12 @@ def about_bio(update, context):
     elif message.reply_to_message:
         username = user.first_name
         update.effective_message.reply_text(
-            "{} No details about him have been saved yet !".format(username)
+            "No details about {} have been saved yet !".format(username)
         )
     else:
-        update.effective_message.reply_text(" Your bio  about you has been saved !")
+        update.effective_message.reply_text(
+            "No details about {} have been saved yet !".format(username)
+        )
 
 
 @run_async
@@ -101,10 +103,10 @@ def set_about_bio(update, context):
         repl_message = message.reply_to_message
         user_id = repl_message.from_user.id
         if user_id == message.from_user.id:
-            message.reply_text("Are you looking to change your own ... ?? That 's it.")
+            message.reply_text("Are you looking to change your own...?? That's it.")
             return
         elif user_id == context.bot.id and sender.id not in SUDO_USERS:
-            message.reply_text(" Only SUDO USERS can change my information.")
+            message.reply_text("Only SUDO USERS can change my information.")
             return
 
         text = message.text
@@ -126,7 +128,7 @@ def set_about_bio(update, context):
                     )
                 )
     else:
-        message.reply_text(" His bio can only be saved if someone MESSAGE as a REPLY")
+        message.reply_text("The bio can only be saved if someone MESSAGE as a REPLY")
 
 
 def __user_info__(user_id):
