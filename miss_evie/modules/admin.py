@@ -16,7 +16,10 @@ from miss_evie.modules.helper_funcs.chat_status import (
     user_admin,
     can_pin,
 )
-from miss_evie.modules.helper_funcs.extraction import extract_user, extract_user_and_text
+from miss_evie.modules.helper_funcs.extraction import (
+    extract_user,
+    extract_user_and_text,
+)
 from miss_evie.modules.helper_funcs.admin_rights import (
     user_can_pin,
     user_can_promote,
@@ -27,7 +30,6 @@ from miss_evie.modules.connection import connected
 from miss_evie.modules.log_channel import loggable
 
 
-@run_async
 @bot_admin
 @can_promote
 @user_admin
@@ -86,7 +88,6 @@ def promote(update, context):
     )
 
 
-@run_async
 @bot_admin
 @can_promote
 @user_admin
@@ -154,7 +155,6 @@ def demote(update, context):
         return ""
 
 
-@run_async
 @bot_admin
 @can_pin
 @user_admin
@@ -203,7 +203,6 @@ def pin(update, context):
     return ""
 
 
-@run_async
 @bot_admin
 @can_pin
 @user_admin
@@ -235,7 +234,6 @@ def unpin(update, context):
     )
 
 
-@run_async
 @bot_admin
 @user_admin
 @typing_action
@@ -271,7 +269,6 @@ def invite(update, context):
         )
 
 
-@run_async
 @typing_action
 def adminlist(update, context):
     administrators = update.effective_chat.get_administrators()
@@ -292,7 +289,6 @@ def adminlist(update, context):
     update.effective_message.reply_text(text, parse_mode=ParseMode.HTML)
 
 
-@run_async
 @bot_admin
 @can_promote
 @user_admin
@@ -352,7 +348,6 @@ def set_title(update, context):
         message.reply_text("I can't set custom title for admins that I didn't promote!")
 
 
-@run_async
 @bot_admin
 @user_admin
 @typing_action
@@ -390,7 +385,6 @@ def setchatpic(update, context):
         msg.reply_text("Reply to some photo or file to set new chat pic!")
 
 
-@run_async
 @bot_admin
 @user_admin
 @typing_action
@@ -410,7 +404,6 @@ def rmchatpic(update, context):
         return
 
 
-@run_async
 @bot_admin
 @user_admin
 @typing_action
@@ -440,7 +433,6 @@ def setchat_title(update, context):
         return
 
 
-@run_async
 @bot_admin
 @user_admin
 @typing_action
@@ -471,7 +463,6 @@ def set_sticker(update, context):
         msg.reply_text("You need to reply to some sticker to set chat sticker set!")
 
 
-@run_async
 @bot_admin
 @user_admin
 @typing_action

@@ -14,7 +14,6 @@ from miss_evie.modules.helper_funcs.filters import CustomFilters
 from miss_evie.modules.helper_funcs.alternate import typing_action
 
 
-@run_async
 @typing_action
 def ping(update, context):
     tg_api = ping3("api.telegram.org", count=5)
@@ -35,23 +34,21 @@ def speed_convert(size):
         n += 1
         size /= power ** n
 
-# convert bit to byte
+        # convert bit to byte
         size /= byte
 
     return f"`{round(size, 2)}` {units[n]}"
 
 
-@run_async
 @typing_action
 def get_bot_ip(update, context):
-    """ Sends the bot's IP address, so as to be able to ssh in if necessary.
-        OWNER ONLY.
+    """Sends the bot's IP address, so as to be able to ssh in if necessary.
+    OWNER ONLY.
     """
     res = requests.get("http://ipinfo.io/ip")
     update.message.reply_text(res.text)
 
 
-@run_async
 @typing_action
 def speedtst(update, context):
     message = update.effective_message
@@ -77,7 +74,6 @@ def speedtst(update, context):
     )
 
 
-@run_async
 @typing_action
 def system_status(update, context):
     uptime = datetime.datetime.fromtimestamp(boot_time()).strftime("%Y-%m-%d %H:%M:%S")

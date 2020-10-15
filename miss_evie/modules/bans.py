@@ -22,7 +22,6 @@ from miss_evie.modules.helper_funcs.alternate import typing_action
 from miss_evie.modules.log_channel import loggable
 
 
-@run_async
 @bot_admin
 @can_restrict
 @user_admin
@@ -106,7 +105,6 @@ def ban(update, context):
     return ""
 
 
-@run_async
 @bot_admin
 @can_restrict
 @user_admin
@@ -205,7 +203,6 @@ def temp_ban(update, context):
     return ""
 
 
-@run_async
 @bot_admin
 @can_restrict
 @user_admin
@@ -275,7 +272,6 @@ def kick(update, context):
     return ""
 
 
-@run_async
 @bot_admin
 @can_restrict
 @loggable
@@ -305,7 +301,6 @@ def banme(update, context):
         update.effective_message.reply_text("Huh? I can't :/")
 
 
-@run_async
 @bot_admin
 @can_restrict
 @typing_action
@@ -322,7 +317,6 @@ def kickme(update, context):
         update.effective_message.reply_text("Huh? I can't :/")
 
 
-@run_async
 @bot_admin
 @can_restrict
 @user_admin

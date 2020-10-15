@@ -38,7 +38,6 @@ from miss_evie.modules.helper_funcs.filters import CustomFilters
 from miss_evie.modules.helper_funcs.alternate import typing_action, send_action
 
 
-@run_async
 @typing_action
 def get_id(update, context):
     args = context.args
@@ -79,7 +78,6 @@ def get_id(update, context):
             )
 
 
-@run_async
 def info(update, context):
     args = context.args
     msg = update.effective_message  # type: Optional[Message]
@@ -185,7 +183,6 @@ def info(update, context):
         del_msg.delete()
 
 
-@run_async
 @typing_action
 def echo(update, context):
     args = update.effective_message.text.split(None, 1)
@@ -197,7 +194,6 @@ def echo(update, context):
     message.delete()
 
 
-@run_async
 @typing_action
 def gdpr(update, context):
     update.effective_message.reply_text("Deleting identifiable data...")
@@ -245,7 +241,6 @@ Keep in mind that your message <b>MUST</b> contain some text other than just a b
 )
 
 
-@run_async
 @typing_action
 def markdown_help(update, context):
     update.effective_message.reply_text(MARKDOWN_HELP, parse_mode=ParseMode.HTML)
@@ -259,7 +254,6 @@ def markdown_help(update, context):
     )
 
 
-@run_async
 @typing_action
 def wiki(update, context):
     kueri = re.split(pattern="wiki", string=update.effective_message.text)
@@ -294,7 +288,6 @@ def wiki(update, context):
             )
 
 
-@run_async
 @typing_action
 def ud(update, context):
     msg = update.effective_message
@@ -326,7 +319,6 @@ def ud(update, context):
         msg.reply_text(f"Error! {err.message}")
 
 
-@run_async
 @typing_action
 def src(update, context):
     update.effective_message.reply_text(
@@ -336,7 +328,6 @@ def src(update, context):
     )
 
 
-@run_async
 @send_action(ChatAction.UPLOAD_PHOTO)
 def wall(update, context):
     chat_id = update.effective_chat.id
@@ -383,7 +374,6 @@ def wall(update, context):
                 )
 
 
-@run_async
 @typing_action
 def getlink(update, context):
     args = context.args
@@ -412,7 +402,6 @@ def getlink(update, context):
     message.reply_text(links)
 
 
-@run_async
 @send_action(ChatAction.UPLOAD_PHOTO)
 def rmemes(update, context):
     msg = update.effective_message
@@ -464,7 +453,6 @@ def rmemes(update, context):
         return msg.reply_text(f"Error! {excp.message}")
 
 
-@run_async
 def staff_ids(update, context):
     sfile = "List of SUDO & SUPPORT users:\n"
     sfile += f"× SUDO USER IDs; {SUDO_USERS}\n"
@@ -478,7 +466,6 @@ def staff_ids(update, context):
         )
 
 
-@run_async
 def stats(update, context):
     update.effective_message.reply_text(
         "Current stats:\n" + "\n".join([mod.__stats__() for mod in STATS])

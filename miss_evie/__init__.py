@@ -9,6 +9,9 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
 )
 
+# set APS logs to warning mode to avoid logspams
+logging.getLogger("apscheduler").setLevel(logging.WARNING)
+
 LOGGER = logging.getLogger(__name__)
 
 LOGGER.info("Starting miss_evie...")
@@ -140,7 +143,7 @@ api_id = TELETHON_ID
 api_hash = TELETHON_HASH
 client = TelegramClient("miss_evie", api_id, api_hash)
 
-updater = tg.Updater(TOKEN, workers=WORKERS, use_context=True)
+updater = tg.Updater(TOKEN, workers=WORKERS)
 
 dispatcher = updater.dispatcher
 

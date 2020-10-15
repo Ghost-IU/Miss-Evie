@@ -65,7 +65,6 @@ if is_module_loaded(FILENAME):
                     + "\n\nFormatting has been disabled due to an unexpected error.",
                 )
 
-    @run_async
     @user_admin
     def logging(update, context):
         message = update.effective_message  # type: Optional[Message]
@@ -84,7 +83,6 @@ if is_module_loaded(FILENAME):
         else:
             message.reply_text("No log channel has been set for this group!")
 
-    @run_async
     @user_admin
     def setlog(update, context):
         message = update.effective_message  # type: Optional[Message]
@@ -129,7 +127,6 @@ if is_module_loaded(FILENAME):
                 " - forward the /setlog to the group\n"
             )
 
-    @run_async
     @user_admin
     def unsetlog(update, context):
         message = update.effective_message  # type: Optional[Message]

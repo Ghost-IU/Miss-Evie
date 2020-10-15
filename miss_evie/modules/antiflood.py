@@ -18,7 +18,6 @@ from miss_evie.modules.helper_funcs.alternate import send_message, typing_action
 FLOOD_GROUP = 3
 
 
-@run_async
 @loggable
 def check_flood(update, context) -> str:
     user = update.effective_user  # type: Optional[User]
@@ -98,7 +97,6 @@ def check_flood(update, context) -> str:
         )
 
 
-@run_async
 @user_admin
 @loggable
 @typing_action
@@ -196,7 +194,6 @@ def set_flood(update, context) -> str:
     return ""
 
 
-@run_async
 @typing_action
 def flood(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -242,7 +239,6 @@ def flood(update, context):
         send_message(update.effective_message, text, parse_mode="markdown")
 
 
-@run_async
 @user_admin
 @loggable
 @typing_action

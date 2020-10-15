@@ -14,7 +14,6 @@ from miss_evie.modules.disable import DisableAbleCommandHandler
 from miss_evie.modules.helper_funcs.alternate import typing_action
 
 
-@run_async
 @typing_action
 def kang(update, context):
     msg = update.effective_message
@@ -386,7 +385,6 @@ def makepack_internal(
         msg.reply_text("Failed to create sticker pack. Possibly due to blek mejik.")
 
 
-@run_async
 def getsticker(update, context):
     msg = update.effective_message
     chat_id = update.effective_chat.id
@@ -417,7 +415,6 @@ def getsticker(update, context):
         )
 
 
-@run_async
 @typing_action
 def stickerid(update, context):
     msg = update.effective_message

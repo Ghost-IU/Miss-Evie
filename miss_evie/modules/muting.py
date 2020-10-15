@@ -15,14 +15,16 @@ from miss_evie.modules.helper_funcs.chat_status import (
     is_user_admin,
     can_restrict,
 )
-from miss_evie.modules.helper_funcs.extraction import extract_user, extract_user_and_text
+from miss_evie.modules.helper_funcs.extraction import (
+    extract_user,
+    extract_user_and_text,
+)
 from miss_evie.modules.helper_funcs.string_handling import extract_time
 from miss_evie.modules.helper_funcs.admin_rights import user_can_ban
 from miss_evie.modules.helper_funcs.alternate import typing_action
 from miss_evie.modules.log_channel import loggable
 
 
-@run_async
 @bot_admin
 @user_admin
 @loggable
@@ -80,7 +82,6 @@ def mute(update, context):
     return ""
 
 
-@run_async
 @bot_admin
 @user_admin
 @loggable
@@ -147,7 +148,6 @@ def unmute(update, context):
     return ""
 
 
-@run_async
 @bot_admin
 @can_restrict
 @user_admin

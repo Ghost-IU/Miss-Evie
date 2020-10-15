@@ -22,7 +22,6 @@ from miss_evie.modules.sql import reporting_sql as sql
 REPORT_GROUP = 5
 
 
-@run_async
 @user_admin
 @typing_action
 def report_setting(update, context):
@@ -72,7 +71,6 @@ def report_setting(update, context):
             )
 
 
-@run_async
 @user_not_admin
 @loggable
 @typing_action

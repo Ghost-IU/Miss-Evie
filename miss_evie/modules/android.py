@@ -13,7 +13,6 @@ GITHUB = "https://github.com"
 DEVICES_DATA = "https://raw.githubusercontent.com/androidtrackers/certified-android-devices/master/by_device.json"
 
 
-@run_async
 @typing_action
 def magisk(update, context):
     url = "https://raw.githubusercontent.com/topjohnwu/magisk_files/"
@@ -48,7 +47,6 @@ def magisk(update, context):
             return
 
 
-@run_async
 @typing_action
 def device(update, context):
     args = context.args
@@ -103,7 +101,6 @@ def device(update, context):
     )
 
 
-@run_async
 @typing_action
 def twrp(update, context):
     args = context.args

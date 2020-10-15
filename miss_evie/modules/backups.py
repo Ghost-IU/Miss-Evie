@@ -24,7 +24,6 @@ import miss_evie.modules.sql.locks_sql as locksql
 from miss_evie.modules.connection import connected
 
 
-@run_async
 @user_admin
 @typing_action
 def import_data(update, context):
@@ -120,7 +119,6 @@ def import_data(update, context):
         msg.reply_text(text, parse_mode="markdown")
 
 
-@run_async
 @user_admin
 def export_data(update, context):
     chat_data = context.chat_data

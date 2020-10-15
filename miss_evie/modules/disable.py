@@ -25,8 +25,8 @@ if is_module_loaded(FILENAME):
     ADMIN_CMDS = []
 
     class DisableAbleCommandHandler(CommandHandler):
-        def __init__(self, command, callback, admin_ok=False, **kwargs):
-            super().__init__(command, callback, **kwargs)
+        def __init__(self, command, callback, admin_ok=False, run_async=True, **kwargs):
+            super().__init__(command, callback, run_async=run_async, **kwargs)
             self.admin_ok = admin_ok
             if isinstance(command, string_types):
                 DISABLE_CMDS.append(command)
@@ -76,8 +76,8 @@ if is_module_loaded(FILENAME):
                             return False
 
     class DisableAbleMessageHandler(MessageHandler):
-        def __init__(self, pattern, callback, friendly="", **kwargs):
-            super().__init__(pattern, callback, **kwargs)
+        def __init__(self, pattern, callback, friendly="", run_async=True, **kwargs):
+            super().__init__(pattern, callback, run_async=run_async, **kwargs)
             DISABLE_OTHER.append(friendly or pattern)
             self.friendly = friendly or pattern
 
@@ -88,7 +88,6 @@ if is_module_loaded(FILENAME):
                     chat.id, self.friendly
                 )
 
-    @run_async
     @user_admin
     @typing_action
     def disable(update, context):
@@ -132,7 +131,6 @@ if is_module_loaded(FILENAME):
         else:
             send_message(update.effective_message, "What should I disable?")
 
-    @run_async
     @user_admin
     @typing_action
     def enable(update, context):
@@ -177,7 +175,6 @@ if is_module_loaded(FILENAME):
         else:
             send_message(update.effective_message, "What should I enable?")
 
-    @run_async
     @user_admin
     # @typing_action
     def list_cmds(update, context):
@@ -203,7 +200,6 @@ if is_module_loaded(FILENAME):
             result += " - `{}`\n".format(escape_markdown(cmd))
         return "The following commands are currently restricted:\n{}".format(result)
 
-    @run_async
     @typing_action
     def commands(update, context):
         chat = update.effective_chat

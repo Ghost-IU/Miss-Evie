@@ -54,7 +54,6 @@ def get_invalid_chats(bot: Bot, update: Update, remove: bool = False):
         return kicked_chats
 
 
-@run_async
 def dbcleanup(update, context):
     msg = update.effective_message
 
@@ -121,7 +120,6 @@ def get_muted_chats(bot: Bot, update: Update, leave: bool = False):
         return muted_chats
 
 
-@run_async
 def leave_muted_chats(update, context):
     message = update.effective_message
     progress_message = message.reply_text("Getting chat count ...")
@@ -136,7 +134,6 @@ def leave_muted_chats(update, context):
     progress_message.delete()
 
 
-@run_async
 def callback_button(update, context):
     bot = context.bot
     query = update.callback_query
@@ -159,9 +156,7 @@ def callback_button(update, context):
         if query.from_user.id in admin_list:
             bot.editMessageText("Cleaning up DB ...", chat_id, message.message_id)
             invalid_chat_count = get_invalid_chats(bot, update, True)
-            reply = "Cleaned up {} chats from db.".format(
-                invalid_chat_count
-            )
+            reply = "Cleaned up {} chats from db.".format(invalid_chat_count)
             bot.sendMessage(chat_id, reply)
         else:
             query.answer("You are not allowed to use this.")

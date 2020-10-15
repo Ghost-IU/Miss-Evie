@@ -15,7 +15,6 @@ from miss_evie.modules.helper_funcs.alternate import typing_action, send_action
 from googletrans import Translator
 
 
-@run_async
 @typing_action
 def gtrans(update, context):
     msg = update.effective_message
@@ -39,7 +38,6 @@ def gtrans(update, context):
         msg.reply_text("Error! invalid language code.")
 
 
-@run_async
 @send_action(ChatAction.RECORD_AUDIO)
 def gtts(update, context):
     msg = update.effective_message
@@ -68,7 +66,6 @@ API_KEY = "6ae0c3a0-afdc-4532-a810-82ded0054236"
 URL = "http://services.gingersoftware.com/Ginger/correct/json/GingerTheText"
 
 
-@run_async
 @typing_action
 def spellcheck(update, context):
     if update.effective_message.reply_to_message:

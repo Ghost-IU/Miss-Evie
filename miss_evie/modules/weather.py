@@ -9,7 +9,6 @@ from miss_evie.modules.disable import DisableAbleCommandHandler
 from miss_evie.modules.helper_funcs.alternate import typing_action
 
 
-@run_async
 @typing_action
 def weather(update, context):
     args = context.args
@@ -41,7 +40,7 @@ def weather(update, context):
         del_msg = update.effective_message.reply_text(
             "{}".format(reply),
             parse_mode=ParseMode.MARKDOWN,
-            disable_web_page_preview=True
+            disable_web_page_preview=True,
         )
         time.sleep(5)
         try:
@@ -106,9 +105,7 @@ def weather(update, context):
 
     reply = f"*Current weather for {cityname}, {country_name} is*:\n\n*Temperature:* `{celsius(curtemp)}°C ({fahr(curtemp)}ºF), feels like {celsius(feels_like)}°C ({fahr(feels_like)}ºF) \n`*Condition:* `{condmain}, {conddet}` {icon}\n*Humidity:* `{humidity}%`\n*Wind:* `{kmph[0]} km/h`\n"
     del_msg = update.effective_message.reply_text(
-        "{}".format(reply),
-        parse_mode=ParseMode.MARKDOWN,
-        disable_web_page_preview=True
+        "{}".format(reply), parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True
     )
     time.sleep(30)
     try:

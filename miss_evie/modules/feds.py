@@ -88,7 +88,6 @@ UNFBAN_ERRORS = {
 }
 
 
-@run_async
 @typing_action
 def new_fed(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -141,7 +140,6 @@ def new_fed(update, context):
         )
 
 
-@run_async
 @typing_action
 def del_fed(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -189,7 +187,6 @@ def del_fed(update, context):
     )
 
 
-@run_async
 @typing_action
 def fed_chat(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -215,7 +212,6 @@ def fed_chat(update, context):
     update.effective_message.reply_text(text, parse_mode=ParseMode.HTML)
 
 
-@run_async
 @typing_action
 def join_fed(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -277,7 +273,6 @@ def join_fed(update, context):
         )
 
 
-@run_async
 @typing_action
 def leave_fed(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -319,7 +314,6 @@ def leave_fed(update, context):
         update.effective_message.reply_text("Only group creators can use this command!")
 
 
-@run_async
 @typing_action
 def user_join_fed(update, context):
     chat = update.effective_chat
@@ -384,7 +378,6 @@ def user_join_fed(update, context):
         update.effective_message.reply_text("Only federation owners can do this!")
 
 
-@run_async
 @typing_action
 def user_demote_fed(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -445,7 +438,6 @@ def user_demote_fed(update, context):
         return
 
 
-@run_async
 @typing_action
 def fed_info(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -494,7 +486,6 @@ def fed_info(update, context):
     update.effective_message.reply_text(text, parse_mode=ParseMode.HTML)
 
 
-@run_async
 @typing_action
 def fed_admin(update, context):
 
@@ -544,7 +535,6 @@ def fed_admin(update, context):
     update.effective_message.reply_text(text, parse_mode=ParseMode.HTML)
 
 
-@run_async
 @typing_action
 def fed_ban(update, context):
 
@@ -950,7 +940,6 @@ def fed_ban(update, context):
         )
 
 
-@run_async
 @typing_action
 def unfban(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -1171,7 +1160,6 @@ def unfban(update, context):
 	"""
 
 
-@run_async
 @typing_action
 def set_frules(update, context):
 
@@ -1230,7 +1218,6 @@ def set_frules(update, context):
         update.effective_message.reply_text("Please write rules to set it up!")
 
 
-@run_async
 @typing_action
 def get_frules(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -1254,7 +1241,6 @@ def get_frules(update, context):
     update.effective_message.reply_text(text, parse_mode=ParseMode.MARKDOWN)
 
 
-@run_async
 @typing_action
 def fed_broadcast(update, context):
     msg = update.effective_message  # type: Optional[Message]
@@ -1314,7 +1300,6 @@ def fed_broadcast(update, context):
         update.effective_message.reply_text(send_text)
 
 
-@run_async
 @send_action(ChatAction.UPLOAD_DOCUMENT)
 def fed_ban_list(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -1422,12 +1407,14 @@ def fed_ban_list(update, context):
             backups = "id,firstname,lastname,username,reason\n"
             for users in getfban:
                 getuserinfo = sql.get_all_fban_users_target(fed_id, users)
-                backups += "{user_id},{first_name},{last_name},{user_name},{reason}".format(
-                    user_id=users,
-                    first_name=getuserinfo["first_name"],
-                    last_name=getuserinfo["last_name"],
-                    user_name=getuserinfo["user_name"],
-                    reason=getuserinfo["reason"],
+                backups += (
+                    "{user_id},{first_name},{last_name},{user_name},{reason}".format(
+                        user_id=users,
+                        first_name=getuserinfo["first_name"],
+                        last_name=getuserinfo["last_name"],
+                        user_name=getuserinfo["user_name"],
+                        reason=getuserinfo["reason"],
+                    )
                 )
                 backups += "\n"
             with BytesIO(str.encode(backups)) as output:
@@ -1495,7 +1482,6 @@ def fed_ban_list(update, context):
             )
 
 
-@run_async
 @typing_action
 def fed_notif(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -1531,7 +1517,6 @@ def fed_notif(update, context):
         )
 
 
-@run_async
 @typing_action
 def fed_chats(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -1596,7 +1581,6 @@ def fed_chats(update, context):
             )
 
 
-@run_async
 @typing_action
 def fed_import_bans(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -1819,7 +1803,6 @@ def fed_import_bans(update, context):
         send_message(update.effective_message, text)
 
 
-@run_async
 def del_fed_button(update, context):
     query = update.callback_query
     fed_id = query.data.split("_")[1]
@@ -1840,7 +1823,6 @@ def del_fed_button(update, context):
             )
 
 
-@run_async
 @typing_action
 def fed_stat_user(update, context):
     user = update.effective_user  # type: Optional[User]
@@ -1949,7 +1931,6 @@ def fed_stat_user(update, context):
         )
 
 
-@run_async
 @typing_action
 def set_fed_log(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -1990,7 +1971,6 @@ def set_fed_log(update, context):
         )
 
 
-@run_async
 @typing_action
 def unset_fed_log(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -2032,7 +2012,6 @@ def unset_fed_log(update, context):
         )
 
 
-@run_async
 @typing_action
 def subs_feds(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -2098,7 +2077,6 @@ def subs_feds(update, context):
         )
 
 
-@run_async
 @typing_action
 def unsubs_feds(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -2164,7 +2142,6 @@ def unsubs_feds(update, context):
         )
 
 
-@run_async
 @typing_action
 def rename_fed(update, context):
     user = update.effective_user
@@ -2187,7 +2164,6 @@ def rename_fed(update, context):
         msg.reply_text("Only federation owner can do this!")
 
 
-@run_async
 @typing_action
 def get_myfedsubs(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -2236,7 +2212,6 @@ def get_myfedsubs(update, context):
         send_message(update.effective_message, listfed, parse_mode="markdown")
 
 
-@run_async
 @typing_action
 def get_myfeds_list(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -2278,7 +2253,6 @@ def is_user_fed_owner(fed_id, user_id):
         return False
 
 
-@run_async
 def welcome_fed(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
@@ -2311,12 +2285,16 @@ def __user_info__(user_id, chat_id):
         infoname = info["fname"]
 
         if int(info["owner"]) == user_id:
-            text = "This user is the owner of the current Federation: <b>{}</b>.".format(
-                infoname
+            text = (
+                "This user is the owner of the current Federation: <b>{}</b>.".format(
+                    infoname
+                )
             )
         elif is_user_fed_admin(fed_id, user_id):
-            text = "This user is the admin of the current Federation: <b>{}</b>.".format(
-                infoname
+            text = (
+                "This user is the admin of the current Federation: <b>{}</b>.".format(
+                    infoname
+                )
             )
 
         elif fban:
@@ -2414,7 +2392,9 @@ MY_FEDS_LIST = CommandHandler("myfeds", get_myfeds_list)
 RENAME_FED = CommandHandler("renamefed", rename_fed)
 
 
-DELETEBTN_FED_HANDLER = CallbackQueryHandler(del_fed_button, pattern=r"rmfed_")
+DELETEBTN_FED_HANDLER = CallbackQueryHandler(
+    del_fed_button, pattern=r"rmfed_", run_async=True
+)
 
 dispatcher.add_handler(NEW_FED_HANDLER)
 dispatcher.add_handler(DEL_FED_HANDLER)

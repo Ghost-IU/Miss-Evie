@@ -53,6 +53,7 @@ class Config(object):
     API_OPENWEATHER = None  # OpenWeather API
     WALL_API = None
 
+
 class Production(Config):
     LOGGER = False
 

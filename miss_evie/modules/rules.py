@@ -13,7 +13,6 @@ from miss_evie.modules.helper_funcs.string_handling import markdown_parser
 from miss_evie.modules.helper_funcs.alternate import typing_action
 
 
-@run_async
 @typing_action
 def get_rules(update, context):
     chat_id = update.effective_chat.id
@@ -69,7 +68,6 @@ def send_rules(update, chat_id, from_pm=False):
         )
 
 
-@run_async
 @user_admin
 @typing_action
 def set_rules(update, context):
@@ -88,7 +86,6 @@ def set_rules(update, context):
         update.effective_message.reply_text("Successfully set rules for this group.")
 
 
-@run_async
 @user_admin
 @typing_action
 def clear_rules(update, context):
