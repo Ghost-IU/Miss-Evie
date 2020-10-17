@@ -173,8 +173,7 @@ def info(update, context):
             chat.id,
             photo=profile,
             caption=(text),
-            parse_mode=ParseMode.HTML,
-            disable_web_page_preview=True,
+            parse_mode="html"
         )
     except IndexError:
         context.bot.sendChatAction(chat.id, "typing")
@@ -202,13 +201,13 @@ def gdpr(update, context):
 
     update.effective_message.reply_text(
         "Your personal data has been deleted.\n\nNote that this will not unban "
-        "you from any chats, as that is telegram data, not miss_evie data. "
-        "Flooding, warns, and gbans are also preserved, as of "
-        "[this](https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/individual-rights/right-to-erasure/), "
+        "you from any chats, as that is telegram data. Note that miss_evie data. "
+        "Flooding, warns, and fbans will be also preserved, as of "
+        '<a href="https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/individual-rights/right-to-erasure">this</a>, '
         "which clearly states that the right to erasure does not apply "
         '"for the performance of a task carried out in the public interest", as is '
         "the case for the aforementioned pieces of data.",
-        parse_mode=ParseMode.MARKDOWN,
+        parse_mode="html",
     )
 
 
@@ -322,7 +321,7 @@ def ud(update, context):
 @typing_action
 def src(update, context):
     update.effective_message.reply_text(
-        "Hey there! You can find what makes me click [here](www.github.com/starry69/miss_eviebot).",
+        "Hey there! You can find what makes me click [here](www.github.com/devops117/Miss-Evie).",
         parse_mode=ParseMode.MARKDOWN,
         disable_web_page_preview=True,
     )

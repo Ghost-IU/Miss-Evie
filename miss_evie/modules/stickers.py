@@ -401,9 +401,8 @@ def getsticker(update, context):
         file_id = msg.reply_to_message.sticker.file_id
         newFile = context.bot.get_file(file_id)
         newFile.download("sticker.png")
+        context.bot.sendChatAction(chat_id, "upload_document")
         context.bot.sendDocument(chat_id, document=open("sticker.png", "rb"))
-        context.bot.sendChatAction(chat_id, "upload_photo")
-        context.bot.send_photo(chat_id, photo=open("sticker.png", "rb"))
 
     else:
         context.bot.sendChatAction(chat_id, "typing")

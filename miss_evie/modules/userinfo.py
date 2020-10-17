@@ -21,7 +21,7 @@ def about_me(update, context):
     user_id = extract_user(message, args)
 
     if user_id:
-        user = bot.get_chat(user_id)
+        user = context.bot.get_chat(user_id)
     else:
         user = message.from_user
 
@@ -83,12 +83,8 @@ def about_bio(update, context):
             "*{}*:\n{}".format(user.first_name, escape_markdown(info)),
             parse_mode=ParseMode.MARKDOWN,
         )
-    elif message.reply_to_message:
-        username = user.first_name
-        update.effective_message.reply_text(
-            "No details about {} have been saved yet !".format(username)
-        )
     else:
+        username = user.first_name
         update.effective_message.reply_text(
             "No details about {} have been saved yet !".format(username)
         )
@@ -144,6 +140,11 @@ def __user_info__(user_id):
         return "<b>About user:</b>\n{me}" "".format(me=me, bio=bio)
     else:
         return ""
+
+
+def __gdpr__(user_id):
+    sql.clear_user_info(user_id)
+    sql.clear_user_bio(user_id)
 
 
 __help__ = """
