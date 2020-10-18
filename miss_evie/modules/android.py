@@ -20,16 +20,26 @@ def magisk(update, context):
     for type, branch in {
         "Stable": ["master/stable", "master"],
         "Beta": ["master/beta", "master"],
-        "Canary": ["canary/debug", "canary"],
+        "Canary": ["canary/canary", "canary"],
     }.items():
         data = get(url + branch[0] + ".json").json()
-        releases += (
-            f"*{type}*: \n"
-            f"• [Changelog](https://github.com/topjohnwu/magisk_files/blob/{branch[1]}/notes.md)\n"
-            f'• Zip - [{data["magisk"]["version"]}-{data["magisk"]["versionCode"]}]({data["magisk"]["link"]}) \n'
-            f'• App - [{data["app"]["version"]}-{data["app"]["versionCode"]}]({data["app"]["link"]}) \n'
-            f'• Uninstaller - [{data["magisk"]["version"]}-{data["magisk"]["versionCode"]}]({data["uninstaller"]["link"]})\n\n'
-        )
+        url_b = url + branch[1] + "/"
+        if type == "Canary":
+            releases += (
+                f"*{type}*: \n"
+                f' Changelog - [apk]({url_b}{data["app"]["note"]}) | [zip]({url_b}{data["magisk"]["note"]}) \n'
+                f' Zip - [{data["magisk"]["version"]}-{data["magisk"]["versionCode"]}]({url_b}{data["magisk"]["link"]}) \n'
+                f' App - [{data["app"]["version"]}-{data["app"]["versionCode"]}]({url_b}{data["app"]["link"]}) \n'
+                f' Uninstaller - [{data["magisk"]["version"]}-{data["magisk"]["versionCode"]}]({url_b}{data["uninstaller"]["link"]})'
+            )
+        else:
+            releases += (
+                f"*{type}*: \n"
+                f'• Changelog - [apk]({data["app"]["note"]}) | [zip]({data["magisk"]["note"]})\n'
+                f'• Zip - [{data["magisk"]["version"]}-{data["magisk"]["versionCode"]}]({data["magisk"]["link"]}) \n'
+                f'• App - [{data["app"]["version"]}-{data["app"]["versionCode"]}]({data["app"]["link"]}) \n'
+                f'• Uninstaller - [{data["magisk"]["version"]}-{data["magisk"]["versionCode"]}]({data["uninstaller"]["link"]})\n\n'
+            )
 
     del_msg = update.message.reply_text(
         "*Latest Magisk Releases:*\n{}".format(releases),
