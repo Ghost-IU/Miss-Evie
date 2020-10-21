@@ -24,7 +24,7 @@ from miss_evie.modules.helper_funcs.string_handling import (
     split_quotes,
     button_markdown_parser,
     escape_invalid_curly_brackets,
-    markdown_to_html,
+    #markdown_to_html,
 )
 from miss_evie.modules.sql import cust_filters_sql as sql
 
@@ -333,9 +333,11 @@ def reply_filter(update, context):
                     try:
                         context.bot.send_message(
                             chat.id,
-                            markdown_to_html(filtext),
+                            #markdown_to_html(filtext),
+                            filtext,
                             reply_to_message_id=message.message_id,
-                            parse_mode=ParseMode.HTML,
+                            #parse_mode=ParseMode.HTML,
+                            parse_mode=ParseMode.MARKDOWN,
                             disable_web_page_preview=True,
                             reply_markup=keyboard,
                         )
@@ -345,8 +347,10 @@ def reply_filter(update, context):
                             try:
                                 context.bot.send_message(
                                     chat.id,
-                                    markdown_to_html(filtext),
-                                    parse_mode=ParseMode.HTML,
+                                    #markdown_to_html(filtext),
+                                    filtext,
+                                    #parse_mode=ParseMode.HTML,
+                                    parse_mode=ParseMode.MARKDOWN,
                                     disable_web_page_preview=True,
                                     reply_markup=keyboard,
                                 )
@@ -378,9 +382,11 @@ def reply_filter(update, context):
                         ENUM_FUNC_MAP[filt.file_type](
                             chat.id,
                             filt.file_id,
-                            caption=markdown_to_html(filtext),
+                            #caption=markdown_to_html(filtext),
+                            caption=filtext,
                             reply_to_message_id=message.message_id,
-                            parse_mode=ParseMode.HTML,
+                            #parse_mode=ParseMode.HTML,
+                            parse_mode=ParseMode.MARKDOWN,
                             reply_markup=keyboard,
                         )
                 break
