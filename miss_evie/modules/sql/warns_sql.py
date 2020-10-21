@@ -308,11 +308,12 @@ def migrate_chat(old_chat_id, new_chat_id):
             .filter(WarnFilters.chat_id == str(old_chat_id))
             .all()
         )
-        for filt in chat_filters:
-            filt.chat_id = str(new_chat_id)
-        SESSION.commit()
-        WARN_FILTERS[str(new_chat_id)] = WARN_FILTERS[str(old_chat_id)]
-        del WARN_FILTERS[str(old_chat_id)]
+        if chat_filters:
+            for filt in chat_filters:
+                filt.chat_id = str(new_chat_id)
+            SESSION.commit()
+            WARN_FILTERS[str(new_chat_id)] = WARN_FILTERS[str(old_chat_id)]
+            del WARN_FILTERS[str(old_chat_id)]
 
     with WARN_SETTINGS_LOCK:
         chat_settings = (

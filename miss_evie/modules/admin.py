@@ -523,7 +523,9 @@ An example of promoting someone to admins:
 
 __mod_name__ = "Admin"
 
-PIN_HANDLER = DisableAbleCommandHandler("pin", pin, pass_args=True, filters=Filters.group)
+PIN_HANDLER = DisableAbleCommandHandler(
+    "pin", pin, pass_args=True, filters=Filters.group
+)
 UNPIN_HANDLER = CommandHandler("unpin", unpin, filters=Filters.group)
 
 INVITE_HANDLER = CommandHandler("invitelink", invite)

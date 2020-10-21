@@ -170,10 +170,7 @@ def info(update, context):
         profile = context.bot.get_user_profile_photos(user.id).photos[0][-1]
         context.bot.sendChatAction(chat.id, "upload_photo")
         context.bot.send_photo(
-            chat.id,
-            photo=profile,
-            caption=(text),
-            parse_mode="html"
+            chat.id, photo=profile, caption=(text), parse_mode="html"
         )
     except IndexError:
         context.bot.sendChatAction(chat.id, "typing")
