@@ -23,7 +23,7 @@ from miss_evie.modules.helper_funcs.misc import build_keyboard, revert_buttons
 from miss_evie.modules.helper_funcs.msg_types import get_note_type
 from miss_evie.modules.helper_funcs.string_handling import (
     escape_invalid_curly_brackets,
-    #markdown_to_html,
+    markdown_to_html,
 )
 from miss_evie.modules.helper_funcs.alternate import typing_action
 from miss_evie.modules.connection import connected
@@ -153,7 +153,7 @@ def get(bot, update, notename, show_none=True, no_format=False):
                 text = ""
 
             keyb = []
-            parseMode = ParseMode.HTML
+            #parseMode = ParseMode.HTML
             parseMode = ParseMode.MARKDOWN
             buttons = sql.get_buttons(chat_id, notename)
             if no_format:
@@ -303,17 +303,14 @@ def clear(update, context):
         notename = args[0].lower()
 
         if sql.rm_note(chat_id, notename):
-            update.effective_message.reply_text(
-                "Successfully deleted '`{note_name}`' from {chat_name}!".format(
-                    note_name=note_name, chat_name=chat_name
-                ),
-                parse_mode=ParseMode.MARKDOWN,
+            owo = f"Successfully deleted '`{note_name}`' from {chat_name}!"
+            msg.reply_text(
+                markdown_to_html(owo), parse_mode=ParseMode.HTML,
             )
         else:
-            update.effective_message.reply_text(
-                "There is no such notes saved in {chat_name}!".format(
-                    chat_name=chat_name
-                )
+            uwu = f"There is no such note saved in {chat_name}!"
+            msg.reply_text(
+                markdown_to_html(uwu), parse_mode=ParseMode.HTML
             )
 
 
