@@ -40,7 +40,7 @@ Any other missing Credits can be seen in commits!
 ## Starting the bot
 
 Once you've setup your database and your configuration (see below) is complete, simply run:
--  `python3 -m miss_evie`
+-  `sudo python3 -m miss_evie`
 
 For podman users
 -  `sudo podman pod start miss_evie`
@@ -128,8 +128,8 @@ class Development(Config):
 ### Python dependencies
 
 Install the necessary python dependencies by moving to the project directory and running:
-- `pip3 install -U --no-cache pip wheel`
-- `pip3 install -U --no-cache -r requirements.txt`
+- `sudo pip3 install -U --no-cache pip wheel`
+- `sudo pip3 install -U --no-cache -r requirements.txt`
 
 This will install all necessary python packages.
 
@@ -154,9 +154,9 @@ In my case bash
 - `cd && mkdir data && chmod 0700 data && initdb -D data`
 
 **Change UNIX Socket dir value(Optional)**
-This is much better than doing `mkdir /run/postgresql && chown postgres:postgres /run/postgresql` on each reboot.
+Appending this one time much better than doing `sudo mkdir /run/postgresql && sudo chown postgres:postgres /run/postgresql` on each reboot.
 
-- `echo "unix_socket_directories = '/tmp'" > data/postgresql.conf`
+- `echo "unix_socket_directories = '/tmp'" >> data/postgresql.conf`
 
 **Start the db server with pg_ctl**
 
