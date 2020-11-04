@@ -11,7 +11,7 @@ pytz
 gtts
 bs4
 lxml
-demjson
+ujson
 wget
 telegraph
 pillow

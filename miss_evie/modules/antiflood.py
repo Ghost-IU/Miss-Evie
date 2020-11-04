@@ -8,7 +8,7 @@ from telegram.utils.helpers import mention_html
 
 from miss_evie import dispatcher
 from miss_evie.modules.helper_funcs.chat_status import is_user_admin, user_admin
-from miss_evie.modules.helper_funcs.string_handling import extract_time
+from miss_evie.modules.helper_funcs.string_handling import extract_time, markdown_to_html
 from miss_evie.modules.log_channel import loggable
 from miss_evie.modules.sql import antiflood_sql as sql
 from miss_evie.modules.connection import connected
@@ -103,91 +103,62 @@ def check_flood(update, context) -> str:
 def set_flood(update, context) -> str:
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
-    message = update.effective_message  # type: Optional[Message]
+    msg = update.effective_message  # type: Optional[Message]
     args = context.args
 
-    conn = connected(context.bot, update, chat, user.id, need_admin=True)
-    if conn:
-        chat_id = conn
-        chat_name = dispatcher.bot.getChat(conn).title
-    else:
-        if update.effective_message.chat.type == "private":
-            send_message(
-                update.effective_message,
-                "This command is meant to use in group not in PM",
+    if chat.type == "private":
+            msg.reply_text(
+                "This command is meant to use in group not in PM"
             )
             return ""
-        chat_id = update.effective_chat.id
-        chat_name = update.effective_message.chat.title
 
-    if len(args) >= 1:
+    elif len(args) >= 1:
         val = args[0].lower()
         if val == "off" or val == "no" or val == "0":
-            sql.set_flood(chat_id, 0)
-            if conn:
-                message.reply_text(
-                    "Antiflood has been disabled in {}.".format(chat_name)
-                )
-            else:
-                message.reply_text("Antiflood has been disabled.")
-
+            sql.set_flood(chat.id, 0)
+            msg.reply_text(
+                markdown_to_html(f"Antiflood has been disabled in {chat.title}."),
+                parse_mode=ParseMode.HTML
+            )
         elif val.isdigit():
             amount = int(val)
-            if amount <= 0:
-                sql.set_flood(chat_id, 0)
-                if conn:
-                    message.reply_text(
-                        "Antiflood has been disabled in {}.".format(chat_name)
-                    )
-                else:
-                    message.reply_text("Antiflood has been disabled.")
+            if amount == 0:
+                sql.set_flood(chat.id, 0)
+                msg.reply_text(
+                    markdown_to_html(f"Antiflood has been disabled in {chat.title}."),
+                    parse_mode=ParseMode.HTML
+                )
                 return (
-                    "<b>{}:</b>"
+                    f"<b>{html.escape(chat.title)}:</b>"
                     "\n#SETFLOOD"
-                    "\n<b>Admin:</b> {}"
-                    "\nDisable antiflood.".format(
-                        html.escape(chat_name), mention_html(user.id, user.first_name)
-                    )
+                    f"\n<b>Admin:</b> {mention_html(user.id, user.first_name)}"
+                    "\nDisable antiflood."
                 )
 
-            elif amount <= 3:
-                send_message(
-                    update.effective_message,
-                    "Antiflood must be either 0 (disabled) or number greater than 3!",
+            elif amount <= 2:
+                msg.reply_text(
+                    "Antiflood must be either `0` (disabled) or a number greater than `2`!",
+                    parse_mode=ParseMode.MARKDOWN
                 )
                 return ""
 
             else:
-                sql.set_flood(chat_id, amount)
-                if conn:
-                    message.reply_text(
-                        "Anti-flood has been set to {} in chat: {}".format(
-                            amount, chat_name
-                        )
-                    )
-                else:
-                    message.reply_text(
-                        "Successfully updated anti-flood limit to {}!".format(amount)
-                    )
+                sql.set_flood(chat.id, amount)
+                msg.reply_text(
+                    markdown_to_html(f"Anti-flood has been set to `{amount}` in chat: {chat.title}"),
+                    parse_mode=ParseMode.HTML
+                )
                 return (
-                    "<b>{}:</b>"
+                    f"<b>{html.escape(chat.title)}:</b>"
                     "\n#SETFLOOD"
-                    "\n<b>Admin:</b> {}"
-                    "\nSet antiflood to <code>{}</code>.".format(
-                        html.escape(chat_name),
-                        mention_html(user.id, user.first_name),
-                        amount,
-                    )
+                    f"\n<b>Admin:</b> {mention_html(user.id, user.first_name)}"
+                    f"\nSet antiflood to <code>{amount}</code>."
                 )
 
-        else:
-            message.reply_text("Invalid argument please use a number, 'off' or 'no'")
     else:
-        message.reply_text(
-            (
-                "Use `/setflood number` to enable anti-flood.\nOr use `/setflood off` to disable antiflood!."
-            ),
-            parse_mode="markdown",
+        msg.reply_text(
+        "Use `/setflood <number >=2>` to enable anti-flood or use `/setflood off` to disable anti-flood.",
+        parse_mode=ParseMode.MARKDOWN
         )
     return ""
 
