@@ -122,7 +122,7 @@ def set_flood(update, context) -> str:
             )
         elif val.isdigit():
             amount = int(val)
-            if amount == 0:
+            if amount <= 0:
                 sql.set_flood(chat.id, 0)
                 msg.reply_text(
                     markdown_to_html(f"Antiflood has been disabled in {chat.title}."),
